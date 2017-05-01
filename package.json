@@ -1,0 +1,16 @@
+{
+	"name":"openchat",
+	"version":"1.0.0",
+	"description":"openchat app",
+	"repository": {
+	  "type": "git",
+	  "url": "git://github.com/hardworker7/openchat.git",
+	  "license":{ "license": "UNLICENSED"},
+	  "dependencies":{
+	  	"socket.io":"1.7.3 ",
+	  	"socket-io-file-upload":"0.6.0",
+	  	"fs-extra":"3.0.0",
+	  	"express":"4.15.2"
+	  }
+	}
+}

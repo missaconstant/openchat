@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>open chat</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="assets/fonts/ionicons/css/ionicons.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="assets/style.css">
+
+		<script type="text/javascript" src="assets/js/do_more.js"></script>
+	</head>
+	<body class="index">
+		<!-- server messaging -->
+		<div class="srv-msg-ctn">
+			<div class="srv-msg-ctt">
+				<div class="srv-msg-left"></div>
+				<div class="srv-msg-right">
+					<div class="contn">
+						<div class="contnt">
+							lorem ipsum dolor
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  -->
+
+		<div class="container">
+			
+			<div class="form">
+				<div class="img">Open.chat</div>
+				<form>
+					<!-- <label>Login</label> -->
+						<input type="text" name="login" placeholder="Login">
+					<!-- <label>Password</label> -->
+						<input type="password" name="password" placeholder="password">
+					<a href="#" class="submitbtn">connexion</a>
+				</form>
+			</div>
+
+		</div>
+
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+		<script type="text/javascript" src="assets/js/main.js"></script>
+		<script type="text/javascript">
+			var socket = io.connect('https://chatforsimplechange.herokuapp.com') ;
+			var user, local = window.localStorage ;
+
+			_('a.submitbtn')._on('click',function(e){
+				e.preventDefault() ;
+				user = {
+					username: _('input[name="login"]').value,
+					password: _('input[name="password"]').value
+				}
+				/**/
+				socket.emit("trylogin",user) ;
+			}) ;
+
+			/* server messages */
+			socket.on('tryloginResponse',function(data){
+				server.message.send(false, data) ;
+			}) ;
+
+			socket.on('errors',function(data){
+				server.message.send('error',data) ;
+			}) ;
+
+			socket.on('loginsuccess',function(data){
+				/* adding params to user */
+				user.discussions = {} ;
+				/* saving to local */
+				local.setItem('openchatUser',JSON.stringify(user)) ;
+				/* alerting */
+				server.message.send('success',data) ;
+				/* redirecting */
+				server.goto('chat.html',2000) ;
+			}) ;
+		</script>
+	</body>
+</html>

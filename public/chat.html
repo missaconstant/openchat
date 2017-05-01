@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>open chat</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="/assets/fonts/ionicons/css/ionicons.min.css">
+		<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+		<link rel="stylesheet" type="text/css" href="/assets/style.css">
+
+		<script type="text/javascript" src="/assets/js/do_more.js"></script>
+	</head>
+	<body>
+		<!-- server messaging -->
+		<div class="srv-msg-ctn">
+			<div class="srv-msg-ctt">
+				<div class="srv-msg-left"></div>
+				<div class="srv-msg-right">
+					<div class="contn">
+						<div class="contnt">
+							lorem ipsum dolor
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--  -->
+
+		<div class="container">
+			
+			<div class="left">
+				<div class="top">
+					<i class="ion-navicon"></i>
+					<div class="searchbar">
+						<input type="search" name="searchuser" placeholder="rechercher ...">
+					</div>
+				</div>
+				<!--  -->
+				<div class="bottom">
+					<div class="users">
+						<!-- users -->
+					</div>
+				</div>
+			</div>
+
+
+			<div class="right">
+				<!-- waiting for user begin a conv -->
+				<div class="hidebefore">
+					<div class="conv-advise">
+						<i class="ion-chatboxes"></i>
+						<p>Pour commencer une conversation, cliquez sur le nom de l'utilisateur.</p>
+						<a href="#">Besoin d'aide ?</a>
+					</div>
+				</div>
+				<!-- /waiting for user begin a conv -->
+
+				<div class="head">
+					<div class="userlastseen">
+						<b>Username</b>
+						<span>last seen 10 hours ago</span>
+					</div>
+					<!--  -->
+					<div class="conversationmenu">
+						<i class="ion-android-search"></i>
+						<i class="ion-android-more-vertical"></i>
+					</div>
+				</div>
+
+				<div class="body">
+					<div class="content">
+						<!-- <div class="a-message">
+							<div class="message">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+							</div>
+						</div>
+						
+						<div class="a-message own">
+							<div class="message">
+								Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+								tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam
+							</div>
+						</div> -->
+					</div>
+				</div>
+
+				<div class="foot">
+					<div class="join-icon-box">
+						<label for="filetogo">
+							<i class="ion-paperclip"></i>
+						</label>
+						<!-- form  -->
+						<form id="sendjoinform">
+							<input type="file" name="filetogo" id="filetogo" style="display: none;">
+						</form>
+					</div>
+					<!--  -->
+					<div class="action-icon-box">
+						<i class="ion-android-happy"></i>
+						<i class="sending ion-ios-mic"></i>
+						<!-- <i class="ion-android-send"></i> -->
+
+						<!-- emoticion bar -->
+						<div class="emos-box">
+							<div class="emos">
+								<img src="/assets/emoticons/emos/01.png">
+								<img src="/assets/emoticons/emos/02.png">
+								<img src="/assets/emoticons/emos/02.png">
+								<img src="/assets/emoticons/emos/03.png">
+								<img src="/assets/emoticons/emos/04.png">
+								<img src="/assets/emoticons/emos/05.png">
+								<img src="/assets/emoticons/emos/06.png">
+								<img src="/assets/emoticons/emos/07.png">
+								<img src="/assets/emoticons/emos/08.png">
+								<img src="/assets/emoticons/emos/09.png">
+								<img src="/assets/emoticons/emos/10.png">
+								<img src="/assets/emoticons/emos/11.png">
+								<img src="/assets/emoticons/emos/12.png">
+								<img src="/assets/emoticons/emos/13.png">
+								<img src="/assets/emoticons/emos/14.png">
+								<img src="/assets/emoticons/emos/15.png">
+								<img src="/assets/emoticons/emos/16.png">
+								<img src="/assets/emoticons/emos/17.png">
+								<img src="/assets/emoticons/emos/18.png">
+								<img src="/assets/emoticons/emos/19.png">
+								<img src="/assets/emoticons/emos/20.png">
+								<img src="/assets/emoticons/emos/21.png">
+							</div>
+						</div>
+
+					</div>
+					<!--  -->
+					<div class="textarea" contenteditable="true" data-ph="Votre message"></div>
+				</div>
+
+			</div>
+
+		</div>
+
+		<script type="text/javascript" src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="assets/js/uploader.js"></script>
+		<script type="text/javascript" src="assets/js/recorder.js"></script>
+		<script type="text/javascript" src="assets/js/audiorecord.js"></script>
+		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
+		<script type="text/javascript" src="assets/js/client.js"></script>
+		<script type="text/javascript" src="assets/js/main.js"></script>
+		<script type="text/javascript">
+			var params = {
+				openedEmos: false
+			}
+
+			/* change mic to send */
+			_('div.textarea').onkeyup = function(e){
+				if(this.textContent.length>0){
+					if(_('i.ion-ios-mic'))
+						_('i.ion-ios-mic').attr({class:'sending ion-android-send'}) ;
+				}
+				else if(_('i.ion-android-send'))
+					_('i.ion-android-send').attr({class:'sending ion-ios-mic'}) ;
+			} ;
+
+			/* send action */
+			_('div.textarea').onkeydown = function(e){
+				if(e.which==13){
+					e.preventDefault() ;
+
+					var msgtext = _('div.textarea').textContent ;
+
+					sendMessage(msgtext) ;
+				}
+			} ;
+
+			/* send action and audio send */
+			var isrecord = false ;
+			_('i.sending').onclick = function(e){
+				if(this.className.split(' ')[1]=='ion-android-send'){
+					var msgtext = _('div.textarea').textContent ;
+					sendMessage(msgtext) ;
+				}
+				else{
+					if(!isrecord){
+						commencer(function(){
+							isrecord = true ;
+						}) ;
+					}
+					else{
+						stopRecording(function(base64){
+							messages.send(base64) ;
+						}) ;
+						isrecord = false ;
+					}
+				}
+			} ;
+
+			/* emoticon box toogler */
+			_('i.ion-android-happy').onclick = function(e){
+				toogleOpenedEmos() ;
+			} ;
+
+			/* emoticon msg */
+			_('div.emos img',true).forEach(function(el){
+				el.onclick = function(){
+					var link = this.src.split('/')[this.src.split('/').length-1].split('.')[0] ;
+					link = '['+this.parentNode.className+':'+link+']' ;
+					sendMessage(link) ;
+					toogleOpenedEmos() ;
+				} ;
+			}) ;
+
+			/* audio recording */
+			// commencer() ;
+			/**/
+
+			function sendMessage(text){
+				if(!text.length) return ;
+				messages.send(text) ;
+				_('div.textarea').innerHTML = '' ;
+				/* replace the send button */
+				if(_('i.ion-android-send'))
+					_('i.ion-android-send').attr({class:'sending ion-ios-mic'}) ;
+			}
+
+			function toogleOpenedEmos(){
+				if(!params.openedEmos){
+					_('div.emos-box').css({display:'block',top:'-235px',opacity:'1'}) ;
+					params.openedEmos = true ;
+				}
+				else{
+					_('div.emos-box').css({display:'none',top:'-220px',opacity:'0'}) ;
+					params.openedEmos = false ;
+				}
+			}
+
+		</script>
+	</body>
+</html>

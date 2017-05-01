@@ -1,0 +1,522 @@
+body, html{
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	font-family: 'Open Sans', sans-serif;
+}
+
+/* login */
+body.index{
+	background: #f1f1f1;
+}
+
+body.index div.form{
+	width: 300px;
+	min-height: 350px;
+	background: #fff;
+	box-shadow: 0px 3px 3px 0px #ddd;
+	margin: auto;
+	margin-top: 150px;
+	border-radius: 3px;
+	padding: 10px;
+	box-sizing: border-box;
+	position: relative;
+	padding-top: 130px;
+}
+
+body.index div.form div.img{
+	position: absolute;
+	top:0; left:0;
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	text-align: center;
+	font-size: 1.7em;
+	background: #319cee;
+	color: #fff;
+	margin: auto;
+	margin-bottom: 30px;
+	font-weight: 900;
+}
+
+body.index div.form label{
+	display: block;
+	color: #737373;
+	font-size: 14px;
+	/*margin-bottom: 10px;*/
+}
+
+body.index div.form input{
+	width: 100%;
+	box-sizing: border-box;
+	padding: 5px;
+	margin-top: 10px;
+	margin-bottom: 20px;
+	border-radius: 3px;
+	border: none;
+	border-bottom: 1px solid #ddd;
+}
+
+body.index div.form a.submitbtn{
+	display: block;
+	padding: 10px;
+	text-align: center;
+	color: #fff;
+	background: #319cee;
+	margin-top: 40px;
+	font-size: 13px;
+	text-decoration: none;
+}
+
+
+/* chat */
+div.srv-msg-ctn{
+	height: 90px;
+	width: 320px;
+	background: #fff;
+	box-shadow: 1px 3px 5px 0px #ddd;
+	position: fixed;
+	bottom: 60px;
+	right: 30px;
+	z-index: 10;
+	display: table;
+	/**/
+	transition: all 0.3s ease;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+	/**/
+	transform: translateX(500px);
+	opacity: 0;
+}
+
+div.srv-msg-ctt{
+	height: 100%;
+	width: 100%;
+}
+
+div.srv-msg-left{
+	float: left;
+	height: 100%;
+	width: 90px;
+	background: #319cee;
+	line-height: 90px;
+	text-align: center;
+	font-size: 3em;
+	color: #fff;
+}
+
+div.srv-msg-left.success{
+	background: #7BC792;
+}
+div.srv-msg-left.info{
+	background: #319cee;
+}
+div.srv-msg-left.error{
+	background: #F25C64;
+}
+
+div.srv-msg-right{
+	margin-left: 90px;
+	font-size: 14px;
+	color: #737373;
+}
+div.srv-msg-right div.contn{
+	display: table;
+	height: 90px;
+	width: 100%;
+}
+div.srv-msg-right div.contn div.contnt{
+	display: table-cell;
+	height: 90px;
+	width: 100%;
+	padding: 5px;
+	box-sizing: border-box;
+	vertical-align: middle;
+}
+
+div.container{
+	height: 100%;
+}
+
+/* left part */
+
+div.container div.left{
+	width: 19.5%;
+	float: left;
+	/*background: #444;*/
+	height: 100%;
+	position: relative;
+}
+
+div.container div.left div.top{
+	height: 50px;
+	width: 100%;
+	padding: 10px;
+	box-sizing: border-box;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: #fff;
+}
+
+div.container div.left div.top i{
+	float: left;
+	font-size: 27px;
+	display: inline-block;
+	width: 40px;
+	/*text-align: center;*/
+	padding-left: 7px;
+	box-sizing: border-box;
+	margin-top: -3px;
+}
+
+div.container div.left div.top div.searchbar{
+	height: 100%;
+	box-sizing: border-box;
+	margin-left: 40px;
+	/*border: 1px solid red;*/
+}
+
+div.container div.left div.top div.searchbar input{
+	width: 100%;
+	height: 100%;
+	border-radius: 3px;
+	background: #eaeaea;
+	border: none;
+	box-sizing: border-box;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+div.container div.left div.bottom{
+	height: 100%;
+	padding-top: 45px;
+	box-sizing: border-box;
+	overflow-y: auto;
+}
+
+div.container div.left div.users{
+	padding: 10px 0px;
+}
+
+div.container div.left div.users div.user{
+	/*margin-bottom: 10px;*/
+	padding: 15px 10px;
+	cursor: pointer;
+	transform: translateX(-70px);
+	transition: all 0.3s ease;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+}
+div.container div.left div.users div.user:hover{
+	background: #e1e1e1;
+}
+
+div.container div.left div.users div.thumb{
+	float: left;
+	width: 48px;
+	height: 48;
+	line-height: 48px;
+	font-size: 1.6em;
+	border-radius: 24px;
+	background: #319cee;
+	color: #fff;
+	text-align: center;
+	margin-top: -3px;
+}
+
+div.container div.left div.users div.username{
+	margin-left: 58px;
+}
+
+div.container div.left div.users div.username b{
+	display: block;
+	font-size: 14px;
+}
+
+div.container div.left div.users div.username span{
+	color: #737373;
+	font-size: 12px;
+}
+
+/* right part */
+
+
+div.container div.right{
+	margin-left: 19.5%;
+	height: 100%;
+	background: #f7f7f7;
+	position: relative;
+	border-left: 1px solid #ccc;
+}
+
+div.container div.right div.hidebefore{
+	position: absolute;
+	top: 0; left: 0;
+	width: 100%;
+	height: 100%;
+	background: #f7f7f7;
+	z-index: 100;
+}
+
+div.container div.right div.hidebefore div.conv-advise{
+	margin-top: 30%;
+	text-align: center;
+	font-size: 13px;
+	color: #535353;
+}
+
+div.container div.right div.hidebefore div.conv-advise i{
+	display: inline-block;
+	font-size: 5em;
+	margin-bottom: 30px;
+}
+
+div.container div.right div.hidebefore div.conv-advise a{
+	padding: 7px 10px;
+	background: #319cee;
+	color: #fff;
+	text-decoration: none;
+}
+
+div.container div.right div.head{
+	position: absolute;
+	top: 0;
+	left: 0;
+	height: 55px;
+	border-bottom: 1px solid #ccc;
+	width: 100%;
+	background: #fff;
+	padding: 10px 20px;
+	box-sizing: border-box;
+}
+
+div.container div.right div.head div.userlastseen{
+	display: inline-block;
+}
+
+div.container div.right div.head div.userlastseen b{
+	display: block;
+	font-size: 13px;
+}
+
+div.container div.right div.head div.userlastseen span{
+	display: inline-block;
+	font-size: 12px;
+	color: #939393;
+	margin-top: 3px;
+}
+
+div.container div.right div.head div.conversationmenu{
+	position: absolute;
+	top: 0;
+	right: 30px;
+	height: 55px;
+	line-height: 55px;
+	word-spacing: 25px;
+}
+
+div.container div.right div.head div.conversationmenu i{
+	font-size: 25px;
+	color: #737373;
+	cursor: pointer;
+}
+
+div.container div.right div.foot{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	min-height: 43px;
+	border-top: 1px solid #ccc;
+	width: 100%;
+	background: #fff;
+	padding: 3px 0;
+	box-sizing: border-box;
+}
+
+div.container div.right div.foot div.textarea{
+	height: auto;
+	min-height: 100%;
+	margin-left: 50px;
+	margin-right: 100px;
+	padding: 5px;
+	box-sizing: border-box;
+	outline: none;
+	font-size: 13px;
+	color: #535353;
+}
+
+[contenteditable=true]:empty:before{
+    content:attr(data-ph);
+    color: #ccc;
+    cursor: text;
+}
+
+div.container div.right div.foot div.join-icon-box{
+	float: left;
+	width: 50px;
+	height: 100%;
+	/*line-height: 45px;*/
+	font-size: 2em;
+	text-align: center;
+	margin-top: -5px;
+	color: #a2a2a2;
+	transform: rotate(45deg);
+	vertical-align: bottom;
+	cursor: pointer;
+}
+
+div.container div.right div.foot div.action-icon-box{
+	float: right;
+	width: 100px;
+	height: 100%;
+	/*line-height: 45px;*/
+	font-size: 1.8em;
+	margin-top: -5px;
+	text-align: center;
+	word-spacing: 20px;
+	color: #a2a2a2;
+	cursor: pointer;
+	position: relative;
+}
+
+div.container div.right div.foot div.action-icon-box i{
+	transition: all 0.2s ease-in;
+	-webkit-transition: all 0.2s ease-in;
+	-moz-transition: all 0.2s ease-in;
+	-ms-transition: all 0.2s ease-in;
+	-o-transition: all 0.2s ease-in;
+}
+
+div.container div.right div.foot div.action-icon-box div.emos-box{
+	width: 220px;
+	height: 200px;
+	background: #fff;
+	position: absolute;
+	right: 30px;
+	top: -220px;
+	text-align: left;
+	box-shadow: 0px 2px 3px 0px #ddd;
+	z-index: 10;
+	display: none;
+	opacity: 0;
+	transition: all 0.2s ease-in;
+	-webkit-transition: all 0.2s ease-in;
+	-moz-transition: all 0.2s ease-in;
+	-ms-transition: all 0.2s ease-in;
+	-o-transition: all 0.2s ease-in;
+}
+
+div.container div.right div.foot div.action-icon-box div.emos-box div.emos{
+	width: 200px;
+	height: 180px;
+	word-spacing: 0px;
+	overflow: auto;
+	padding: 10px;
+	/*box-sizing: border-box;*/
+}
+
+div.container div.right div.foot div.action-icon-box div.emos-box div.emos::-webkit-scrollbar {
+    width: 5px;
+}
+ 
+div.container div.right div.foot div.action-icon-box div.emos-box div.emos::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 10px;
+}
+ 
+div.container div.right div.foot div.action-icon-box div.emos-box div.emos::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); 
+}
+
+div.container div.right div.foot div.action-icon-box div.emos-box:after{
+	width: 20px;
+	height: 20px;
+	background: #fff;
+	position: absolute;
+	bottom: -10px; right: 31px;
+	content: " ";
+	transform: rotate(45deg);
+	z-index: 0;
+	border-right: 1px solid #eee;
+	border-bottom: 1px solid #eee;
+}
+
+div.container div.right div.foot div.action-icon-box div.emos-box img{
+	width: 17%;
+	margin: 0;
+}
+
+div.container div.right div.body{
+	height: 100%;
+	padding: 55px 0 45px 0;
+	box-sizing: border-box;
+}
+
+div.container div.right div.body div.content{
+	height: 100%;
+	padding: 10px;
+	padding-bottom: 20px;
+	font-size: 13px;
+	overflow-x: hidden;
+	overflow-y: auto;
+	box-sizing: border-box;
+}
+
+div.container div.right div.body div.content div.a-message{
+	transition: all 0.3s ease;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	-ms-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+}
+div.container div.right div.body div.content div.a-message:not(:first-child){
+	margin-top: 20px;
+}
+div.container div.right div.body div.content div.a-message:last-child{
+	margin-bottom: 10px;
+}
+div.container div.right div.body div.content div.a-message.own{
+	text-align: right;
+	color: #fff;
+}
+
+div.container div.right div.body div.content div.a-message div.message{
+	background: #fff;
+	max-width: 40%;
+	padding: 6px;
+	box-sizing: border-box;
+	box-shadow: 0px 3px 2px 0px #ddd;
+	text-align: left;
+	display: inline-block;
+	position: relative;
+}
+
+div.container div.right div.body div.content div.a-message.own div.message{
+	background: #319cee;
+}
+
+div.container div.right div.body div.content div.a-message div.message img{
+	width: 100%;
+}
+
+div.container div.right div.body div.content div.a-message div.message a.dwnd{
+	position: absolute;
+	bottom: 5px;
+	right: 5px;
+	color: #fff;
+	font-size: 22px;
+	width: 30px;
+	height: 30px;
+	background: #54aa1e;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 15px;
+}
