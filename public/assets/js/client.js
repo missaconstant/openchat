@@ -1,4 +1,4 @@
-var socket = io.connect('http://192.168.43.56:8080') ;
+var socket = io.connect('https://chatisopen.heroku.com') ;
 
 /* socket uploader */
 var uploader = new SocketIOFileUpload(socket);
