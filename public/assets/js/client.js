@@ -1,6 +1,6 @@
-var socket = io.connect('https://chatforsimplechange.herokuapp.com') ;
-/* socket uploader */
+var socket = io.connect('http://192.168.43.56:8080') ;
 
+/* socket uploader */
 var uploader = new SocketIOFileUpload(socket);
 	uploader.listenOnInput(document.getElementById("filetogo"));
 
@@ -14,37 +14,39 @@ var uploader = new SocketIOFileUpload(socket);
     }) ;
 
 /**/
-window.onload = function(){
+window.onload = function() {
 	var isLogged = false
 	/* is user logged on ? */
 	var st = window.localStorage ;
 	/* if not get him back to login page */
-	if(!st.getItem('openchatUser'))
-		server.goto('index.html') ;
+	if (!st.getItem('openchatUser')) {
+		server.goto('/') ;
+	}
 	/* asking to socket if he know me */
 	socket.emit('doyouknowme',JSON.parse(st.getItem('openchatUser')).username) ;
-	socket.on('knowyou',function(rep){
-		if(rep=='true'){
+	socket.on('knowyou',function (rep) {
+		if (rep=='true') {
 			isLogged = JSON.parse(st.getItem('openchatUser')).username ;
-			if(isLogged){
+			if (isLogged) {
 				/* setting pseudo */
 				server.me = isLogged ;
 				/* getting connected users */
 				socket.emit('getconnectedusers',isLogged) ;
 			}
 		}
-		else
+		else {
 			server.goto('index.html') ;
+		}
 	}) ;
 
 	/* is writting */
-	_('div.textarea').onfocus = function(){
+	_('div.textarea').onfocus = function() {
 		socket.emit('iswritting',{
 			writter: server.me,
 			to: server.conversationwith
 		}) ;
 	} ;
-	_('div.textarea').onblur = function(){
+	_('div.textarea').onblur = function() {
 		socket.emit('endwritting',{
 			writter: server.me,
 			to: server.conversationwith

@@ -151,41 +151,39 @@
 			}
 
 			/* change mic to send */
-			_('div.textarea').onkeyup = function(e){
-				if(this.textContent.length>0){
-					if(_('i.ion-ios-mic'))
+			_('div.textarea').onkeyup = function(e) {
+				if (this.textContent.length>0) {
+					if (_('i.ion-ios-mic'))
 						_('i.ion-ios-mic').attr({class:'sending ion-android-send'}) ;
 				}
-				else if(_('i.ion-android-send'))
+				else if (_('i.ion-android-send'))
 					_('i.ion-android-send').attr({class:'sending ion-ios-mic'}) ;
 			} ;
 
 			/* send action */
-			_('div.textarea').onkeydown = function(e){
-				if(e.which==13){
+			_('div.textarea').onkeydown = function(e) {
+				if (e.which==13) {
 					e.preventDefault() ;
-
 					var msgtext = _('div.textarea').textContent ;
-
 					sendMessage(msgtext) ;
 				}
 			} ;
 
 			/* send action and audio send */
 			var isrecord = false ;
-			_('i.sending').onclick = function(e){
-				if(this.className.split(' ')[1]=='ion-android-send'){
+			_('i.sending').onclick = function(e) {
+				if (this.className.split(' ')[1]=='ion-android-send') {
 					var msgtext = _('div.textarea').textContent ;
 					sendMessage(msgtext) ;
 				}
-				else{
-					if(!isrecord){
-						commencer(function(){
+				else {
+					if (!isrecord) {
+						commencer(function() {
 							isrecord = true ;
 						}) ;
 					}
-					else{
-						stopRecording(function(base64){
+					else {
+						stopRecording(function(base64) {
 							messages.send(base64) ;
 						}) ;
 						isrecord = false ;
@@ -194,13 +192,13 @@
 			} ;
 
 			/* emoticon box toogler */
-			_('i.ion-android-happy').onclick = function(e){
+			_('i.ion-android-happy').onclick = function(e) {
 				toogleOpenedEmos() ;
 			} ;
 
 			/* emoticon msg */
-			_('div.emos img',true).forEach(function(el){
-				el.onclick = function(){
+			_('div.emos img',true).forEach(function(el) {
+				el.onclick = function() {
 					var link = this.src.split('/')[this.src.split('/').length-1].split('.')[0] ;
 					link = '['+this.parentNode.className+':'+link+']' ;
 					sendMessage(link) ;
@@ -212,21 +210,21 @@
 			// commencer() ;
 			/**/
 
-			function sendMessage(text){
-				if(!text.length) return ;
+			function sendMessage(text) {
+				if (!text.length) return ;
 				messages.send(text) ;
 				_('div.textarea').innerHTML = '' ;
 				/* replace the send button */
-				if(_('i.ion-android-send'))
+				if (_('i.ion-android-send'))
 					_('i.ion-android-send').attr({class:'sending ion-ios-mic'}) ;
 			}
 
-			function toogleOpenedEmos(){
-				if(!params.openedEmos){
+			function toogleOpenedEmos() {
+				if (!params.openedEmos) {
 					_('div.emos-box').css({display:'block',top:'-235px',opacity:'1'}) ;
 					params.openedEmos = true ;
 				}
-				else{
+				else {
 					_('div.emos-box').css({display:'none',top:'-220px',opacity:'0'}) ;
 					params.openedEmos = false ;
 				}

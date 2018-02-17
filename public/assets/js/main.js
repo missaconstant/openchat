@@ -1,5 +1,5 @@
 var messages = {
-	send: function(message){
+	send: function(message) {
 		/* send with socket */
 		socket.emit('usermessage',{
 			from: server.me,
@@ -12,8 +12,8 @@ var messages = {
 		this.addmsgtobd(server.me,server.conversationwith,message,'own') ;
 	},
 
-	receive: function(sender,message){
-		if(server.conversationwith==sender){
+	receive: function(sender,message) {
+		if (server.conversationwith==sender) {
 			new this.create(message) ;
 			server.ring() ;
 		}
@@ -25,10 +25,10 @@ var messages = {
 		this.addmsgtobd(sender,server.me,message) ;
 	},
 
-	create: function(content,type=false){
+	create: function(content,type=false) {
 		var top = this ;
 
-		return (function(content,type){
+		return (function(content,type) {
 			this.parent = _('div.body div.content') ;
 			this.wrapper = _createElement('div', {class:'a-message'+(type&&type.length?' '+type:'')}) ;
 			this.message = _createElement('div', {class:'message'}, false, this.wrapper, content) ;
@@ -38,7 +38,7 @@ var messages = {
 			this.downbtn = _createElement('a',{class:'dwnd',download:"true"},false,false,'<i class="ion-ios-download-outline"></i>') ;
 
 			/* msg is an emoticon */
-			if(/\[[a-zA-Z0-9]+\:[a-zA-Z0-9]+\]/.test(content)){
+			if (/\[[a-zA-Z0-9]+\:[a-zA-Z0-9]+\]/.test(content)) {
 				var emosparsed = content.split('[')[1].split(']')[0].split(':') ;
 				this.message.innerHTML = '' ;
 				this.message.css({background:'none'}) ;
@@ -46,24 +46,24 @@ var messages = {
 					src: 'assets/emoticons/'+emosparsed[0]+'/'+emosparsed[1]+'.png'
 				})) ;
 			}
-			else if(/data\:audio\/wav;base64,/.test(content)){
+			else if (/data\:audio\/wav;base64,/.test(content)) {
 				this.message.innerHTML = '' ;
 				this.playbtn.addto(this.message) ;
 				this.message.innerHTML += ' : Audio file' ;
 				this.message.attr({'data-aux':content}) ;
 			}
-			else if(/file\:[a-zA-Z0-9]+/.test(content)){
+			else if (/file\:[a-zA-Z0-9]+/.test(content)) {
 
 				var fname = content.split(':')[2].split(']')[0] ;
 				this.message.innerHTML = '' ;
 				/*download btn*/
-				this.downbtn.href = 'server/files_uploaded/'+fname ;
-				this.downbtn.download = 'server/files_uploaded/'+fname ;
+				this.downbtn.href = 'files_uploaded/'+fname ;
+				this.downbtn.download = 'files_uploaded/'+fname ;
 				this.downbtn.addto(this.message) ;
 				
-				if(content.split(':')[1].toLowerCase()=='image'){
+				if (content.split(':')[1].toLowerCase()=='image') {
 					this.message.appendChild(_createElement('img',{
-						src: 'server/files_uploaded/'+fname
+						src: 'files_uploaded/'+fname
 					})) ;
 				}
 				else{
@@ -81,33 +81,33 @@ var messages = {
 
 			scrollChat() ;
 
-			this.message.addEventListener('click',function(e){
-				if(e.target.className=='ion-ios-play'){
+			this.message.addEventListener('click',function (e) {
+				if (e.target.className=='ion-ios-play') {
 					server.audioPlayer.play(this.attr('data-aux')) ;
 				}
 			},false) ;
 		})(content,type) ;
 	},
 
-	toogleconversation: function(username){
+	toogleconversation: function(username) {
 		/* top */ var top = this ;
 		this.box.innerHTML = '' ;
 		/* getting messages from bd */
 		var messages = this.getmessages(username) ;
-		if(messages){
-			messages.forEach(function(m){
+		if (messages) {
+			messages.forEach(function(m) {
 				new top.create(m.message,m.type) ;
 			}) ;
 		}
 	},
 
-	addmsgtobd: function(sender,to,msg,type){
+	addmsgtobd: function(sender,to,msg,type) {
 		var user = window.localStorage.getItem('openchatUser') ;
 			user = JSON.parse(user) ;
 			/* who with am i conversiong ? */
 			var converser = sender==server.me ? to : sender ;
 			/* if exists conversation with this user */
-			if(user.discussions[converser]){
+			if (user.discussions[converser]) {
 				/* formatting the message */
 				var newmessage = this.formatmsg(sender,to,msg,type) ;
 				/* adding the message to discussion db */
@@ -128,7 +128,7 @@ var messages = {
 			window.localStorage.setItem('openchatUser',user) ;
 	},
 
-	formatmsg: function(sender,to,msg,type){
+	formatmsg: function(sender,to,msg,type) {
 		return {
 			to: to,
 			sender: sender,
@@ -138,12 +138,12 @@ var messages = {
 		} ;
 	},
 
-	getmessages: function(username){
+	getmessages: function(username) {
 		var user = JSON.parse(window.localStorage.getItem('openchatUser')) ;
 		return user.discussions[username] ;
 	},
 
-	parseemostext: function(mtext){
+	parseemostext: function(mtext) {
 		return mtext.split('[')[1].split(']')[0].split(':') ;
 	},
 
@@ -162,9 +162,9 @@ var server = {
 		left: _('.srv-msg-left'),
 		right: _('.srv-msg-right'),
 		type: 'success',
-		send: function(type,message){
+		send: function(type,message) {
 			/* setting type */
-			if(type){
+			if (type) {
 				this.left.className = this.left.className.split(' ')[0]+' '+type ;
 			}
 			/**/
@@ -176,9 +176,9 @@ var server = {
 		}
 	},
 
-	user: function(username){
+	user: function(username) {
 		/* top */var top1 = this ;
-		return (function(pseudo){
+		return (function(pseudo) {
 			/* top */var top2 = this ;
 			this.pseudo = pseudo ;
 			this.parent = _('div.left div.bottom div.users') ;
@@ -189,7 +189,7 @@ var server = {
 			this.me.addto(this.parent) ;
 			this.me.css({transform:'translateX(0px)'}) ;
 			/* events */
-			this.me.onclick = function(e){
+			this.me.onclick = function(e) {
 				changeUserConv(pseudo) ;
 				this.style.background = '';
 			} ;
@@ -197,52 +197,55 @@ var server = {
 		})(username) ;
 	},
 
-	adduser: function(username){
+	adduser: function(username) {
 		this.users[username] = new this.user(username) ;
 	},
 
-	goto: function(url,timeout){
-		var apply = function(){
+	goto: function(url,timeout) {
+		var apply = function() {
 			window.location = url ;
 		} ;
 		/**/
-		if(timeout)
-			setTimeout(function(){
+		if (timeout) {
+			setTimeout(function () {
 				apply() ;
 			},timeout) ;
-		else
+		}
+		else {
 			apply() ;
+		}
 	},
 
 	audio: false,
 
 	audioPlayer: {
 		player: _createElement('audio',{src:''},{display:'none'},document.body),
-		play: function(link){
+		play: function(link) {
 			this.player.src = link ;
 			this.player.play() ;
 		}
 	},
 
-	ring: function(){
-		if(this.audio)
+	ring: function() {
+		if (this.audio) {
 			this.audio.play() ;
+		}
 	},
 
 	users: {}
 }
 
-function scrollChat(){
+function scrollChat() {
 	$('div.body div.content').animate({
 		scrollTop: _('div.body div.content').scrollHeight
 	},500) ;
 }
 
-(function(source){
+(function(source) {
 	server.audio = _createElement('audio',{src:source},{display:'none'},document.body) ;
 })('assets/songs/01.mp3') ;
 
-function changeUserConv(username){
+function changeUserConv(username) {
 	/* change user name on the top */
 	_('.userlastseen b').textContent = username ;
 	_('.userlastseen span').textContent = "Last seen 10 hours ago" ;
@@ -255,10 +258,10 @@ function changeUserConv(username){
 }
 
 /* receiver deamon */
-(function(s){
-	if(!s) return ;
-	s.on('receivingmessage',function(data){
-		if(data.to==server.me){
+(function(s) {
+	if (!s) return ;
+	s.on('receivingmessage',function (data) {
+		if (data.to==server.me) {
 			messages.receive(data.from,data.message) ;
 		}
 	}) ;

@@ -29,12 +29,12 @@
 		<div class="container">
 			
 			<div class="form">
-				<div class="img">Open.chat</div>
+				<div class="img"></div>
 				<form>
-					<!-- <label>Login</label> -->
-						<input type="text" name="login" placeholder="Login">
-					<!-- <label>Password</label> -->
-						<input type="password" name="password" placeholder="password">
+					<label>Login</label>
+					<input type="text" name="login" placeholder="Enter your login">
+					<label>Password</label>
+					<input type="password" name="password" placeholder="Enter your password">
 					<a href="#" class="submitbtn">connexion</a>
 				</form>
 			</div>
@@ -45,7 +45,7 @@
 		<script type="text/javascript" src="assets/js/jquery.min.js"></script>
 		<script type="text/javascript" src="assets/js/main.js"></script>
 		<script type="text/javascript">
-			var socket = io.connect('https://chatforsimplechange.herokuapp.com') ;
+			var socket = io.connect('http://192.168.43.56:8080') ;
 			var user, local = window.localStorage ;
 
 			_('a.submitbtn')._on('click',function(e){
@@ -75,7 +75,7 @@
 				/* alerting */
 				server.message.send('success',data) ;
 				/* redirecting */
-				server.goto('chat.html',2000) ;
+				server.goto('/chat',2000) ;
 			}) ;
 		</script>
 	</body>

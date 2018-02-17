@@ -1,9 +1,7 @@
 var iofile = require("socketio-file-upload");
 var fs = require("fs") ;
-
 var express = require('express') ;
 var app = express() ;
-
 var server = require('http').createServer(app) ;
 var io = require('socket.io')(server);
 
@@ -15,6 +13,14 @@ app.use(express.static(__dirname + '/public')) ;
 app.get('/',function(req,res){
 	res.sendFile(__dirname + '/public/index.html') ;
 }) ;
+
+app.get('/chat',function(req,res){
+	res.sendFile(__dirname + '/public/chat.html') ;
+}) ;
+
+app.get('/download',function(req,res){
+	res.sendFile(__dirname + '/public/chat.html') ;
+}) ;
 /**/
 
 var users = {} ;
@@ -25,12 +31,12 @@ io.on('connection', function(socket){
 	console.log("connection entrante !") ;
 
 	var uploader = new iofile() ;
-		uploader.dir = "public/server/files_uploaded" ;
+		uploader.dir = __dirname + "/public/files_uploaded" ;
 		uploader.listen(socket) ;
 		uploader.on('saved',function(evt){
 			socket.broadcast.emit('receivingmessage',"[file:"+evt.name+"]") ;
 			console.log(evt) ;
-		}) ;
+		});
 
 	/* try login */
 	socket.on('trylogin',function(data){
