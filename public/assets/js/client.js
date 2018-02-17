@@ -1,4 +1,4 @@
-var socket = io.connect('https://chatisopen.heroku.com') ;
+var socket = io.connect('https://chatisopen.herokuapp.com') ;
 
 /* socket uploader */
 var uploader = new SocketIOFileUpload(socket);
